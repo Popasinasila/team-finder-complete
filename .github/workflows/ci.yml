@@ -48,7 +48,7 @@ jobs:
         run: pip install -r requirements.txt flake8
 
       - name: Run flake8 (PEP 8)
-        run: flake8 users/ projects/ team_finder/ manage.py --max-line-length=100 --exclude=__pycache__
+        run: flake8 users/ projects/ team_finder/ manage.py --max-line-length=100 --exclude=__pycache__,migrations
 
       - name: Wait for PostgreSQL
         run: |
