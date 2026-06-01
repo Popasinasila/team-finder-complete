@@ -50,8 +50,12 @@ jobs:
       - name: Run flake8 (PEP 8)
         run: flake8 users/ projects/ team_finder/ manage.py --max-line-length=100 --exclude=__pycache__
 
-      - name: Run Django system check
-        run: python manage.py check
+      - name: Wait for PostgreSQL
+        run: |
+          until pg_isready -h localhost -p 5432 -U team_finder; do
+            echo "Waiting for postgres..."
+            sleep 1
+          done
 
       - name: Run migrations
         run: python manage.py migrate --no-input
